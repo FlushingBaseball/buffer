@@ -1,0 +1,27 @@
+var jsmediatags = require("jsmediatags");
+
+jsmediatags.read("./song.mp3", {
+  onSuccess: function(tag) {
+    console.log(tag);
+    var image = tag.tags.picture;
+    document.getElementById('title').innerHTML = tag.tags.title;
+    document.getElementById('artist').innerHTML= tag.tags.artist;
+    document.getElementById('album').innerHTML = tag.tags.album;
+    document.getElementById('picture').title = tag.tags.title;
+      if (image) {
+        var base64String = "";
+        for (var i = 0; i < image.data.length; i++) {
+            base64String += String.fromCharCode(image.data[i]);
+        }
+        var base64 = "data:" + image.format + ";base64," +
+                window.btoa(base64String);
+        document.getElementById('picture').setAttribute('src',base64);
+      } else {
+        document.getElementById('picture').style.display = "none";
+        document.getElementById('picture').title = "none";
+      }
+  },
+  onError: function(error) {
+    console.log(':(', error.type, error.info);
+  }
+});
