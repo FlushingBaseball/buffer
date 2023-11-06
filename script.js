@@ -46,21 +46,31 @@ playBtn.addEventListener('click', () =>{
   }
 })
 
-nextBtn.addEventListener('click', ()=>{
+nextBtn.addEventListener('click', nextSong)
+prevBtn.addEventListener('click', prevSong)
 
-  songIndex++
-  loadSong(songs[songIndex])
-})
+progress.addEventListener(())
 
-prevBtn.addEventListener('click', ()=>{
-  if (songIndex -1 >= 0){
-    songIndex--
-    loadSong(songs[songIndex]) 
+function nextSong(){
+  songIndex--
+  if (songIndex > song.length -1){
+    songIndex= 0
   }
-  else{
-    console.alert("hey")
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+
+function prevSong(){
+  songIndex--
+  if (songIndex < 0){
+    songIndex= songs.length-1
   }
-})
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+
 
 // document.querySelector('input[type="file"]').onchange = function(e){
 //   let reader = new FileReader();
